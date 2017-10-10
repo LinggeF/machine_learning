@@ -53,7 +53,7 @@ for i in range(0, cols, 1):
 
 eta = .0001
 
-for k in range(0, 100, 1):
+for k in range(0, 10000, 1):
     #compute dellf
     dellf = []
     for i in range(0,cols,1):
@@ -74,18 +74,18 @@ for k in range(0, 100, 1):
     for i in range(0, rows, 1):
         if (classes[i] != None):
             error = error + (classes[i] - np.dot(w, data[i])) ** 2
-    print "error=",error
+    print ("error=",error)
 
-print "w="
+print ("w=")
 normw=0;
 for j in range(0,cols-1,1):
     normw=normw+w[j]**2
-    print w[j]
-print "\n"
+    print (w[j])
+print ("\n")
 normw=math.sqrt(normw)
-print "||w||=",normw
+print ("||w||=",normw)
 d_origin=w[len(w)-1]/normw;
-print "distance to origin=",d_origin
+print ("distance to origin=",d_origin)
 
 ##prediction
 output_file=sys.argv[3]
@@ -94,9 +94,9 @@ for i in range(0,rows,1):
     if(classes[i]==None):
         dp=np.dot(w,data[i])
         if dp>0:
-            print "1 "+i
+            print ("1 "+i)
         else:
-            print "0 "+i
+            print ("0 "+i)
 f.close()
 
 
