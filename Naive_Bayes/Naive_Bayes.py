@@ -93,7 +93,7 @@ for i in range(0, rows, 1):
             d0 = d0 + ((data[i][j] - m0[j]) ** 2 / s0[j])
             d1 = d1 + ((data[i][j] - m1[j]) ** 2 / s1[j])
 
-        print "d0=", d0, "d1=", d1
+        print("d0=", d0, "d1=", d1)
         if d0 < d1:
             print ("0", i)
         else:

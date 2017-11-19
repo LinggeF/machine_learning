@@ -8,6 +8,7 @@ def dot_product(a1, a2):
         a+=a1[i]*a2[i];
     return a
 
+
 def loadData(datafile):
     f = open(datafile, 'r')
     data = []
@@ -53,7 +54,7 @@ for i in range(0, cols, 1):
 
 # gradient descent
 
-eta = 0.001
+eta = 0.01
 convergence = 0.0000001
 new_error=1
 error=1
@@ -62,14 +63,14 @@ while (abs(new_error) > convergence):
     delf = [0] * cols
     for i in range(0, rows, 1):
         if (labels[i] != None):
-            condition = dot_product(w, data[i]) * labels[i]
-            if (condition < 1):
-                for j in range(0,cols,1):
-                    delf[j] = delf[j] - data[i][j] * labels[i]
+            dp = dot_product(w, data[i])
+            factor=labels[i]-1/(1+math.e**(-dp))
+            for j in range(0,cols,1):
+                delf[j] = delf[j] +data[i][j]*factor
 
     # update
     for j in range(0, cols, 1):
-        w[j] = w[j] - eta * delf[j]
+        w[j] = w[j] + eta * delf[j]
 
     ##compute error
     prev=error
@@ -77,7 +78,7 @@ while (abs(new_error) > convergence):
     for i in range(0, rows, 1):
         if (labels[i] != None):
             dp = dot_product(w, data[i])
-            error =error+ max(0, 1 - labels[i] * dp)
+            error = error + (labels[i] - 1/(1+math.e**(-dp))) ** 2
 
     new_error = prev - error
     print("error=",new_error)
